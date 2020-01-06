@@ -6,7 +6,7 @@ import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import API from "../utils/API";
 
-class Books extends Component {
+class Saved extends Component {
   // Initialize this.state.books as an empty array
   state = {
     books: [],
@@ -124,4 +124,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Saved;
