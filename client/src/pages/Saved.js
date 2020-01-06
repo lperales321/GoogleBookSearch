@@ -12,7 +12,9 @@ class Saved extends Component {
     books: [],
     title: '',
     author: '',
-    synopsis: ''
+    description: '',
+    image: '',
+    link: ''
   };
 
   // Add code here to get all books from the database and save them to this.state.books
@@ -51,13 +53,15 @@ class Saved extends Component {
     // When the form is submitted, prevent its default behavior, get recipes update the recipes state
     event.preventDefault();
 
-    const {title, author, synopsis} = this.state;
+    const {title, author, description, image, link} = this.state;
 
-    if (author && title) {
+    if (title && author && description && image && link) {
       API.saveBook({
         title,
         author,
-        synopsis
+        description,
+        image,
+        link
       })
       // .then(res => {
       //   this.loadBooks();
@@ -97,9 +101,10 @@ class Saved extends Component {
               <FormBtn onClick={this.handleFormSubmit}>Submit Book</FormBtn>
             </form>
           </Col> */}
-          <Col size="md-6 sm-12">
+          <Col size="md-12 sm-12">
             <Jumbotron>
-              <h1>Books On My List</h1>
+              <h1>(React) Google Books Search</h1>
+              <h3>Search for and Save Books of Interest</h3>
             </Jumbotron>
             {this.state.books.length ? (
               <List>
@@ -108,6 +113,9 @@ class Saved extends Component {
                     <a href={"/books/" + book._id}>
                       <strong>
                         {book.title} by {book.author}
+                        {book.description}
+                        {book.image}
+                        {book.link}
                       </strong>
                     </a>
                     <DeleteBtn onClick={() => this.handleDeleteClick(book._id)} />
