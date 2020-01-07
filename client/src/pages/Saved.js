@@ -4,7 +4,6 @@ import DeleteBtn from "../components/DeleteBtn";
 import ViewBtn from "../components/ViewBtn";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
 import API from "../utils/API";
 
 class Saved extends Component {
@@ -18,13 +17,6 @@ class Saved extends Component {
     link: ''
   };
 
-  // Add code here to get all books from the database and save them to this.state.books
-  // async componentDidMount() {
-  //   const result = await API.getBooks();
-  //   this.setState({
-  //     books: result.data
-  //   });
-  // }
   async componentDidMount() {
     this.loadBooks();
   }
@@ -36,50 +28,8 @@ class Saved extends Component {
     });
   }
 
-  //without using async
-  //componentDidMount(){
-  // API.getBooks().then(result => this.setState({books: result.data}));
-  //}
-
-  handleInputChange = event => {
-    // Destructure the name and value properties off of event.target
-    // Update the appropriate state
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleFormSubmit = event => {
-    // When the form is submitted, prevent its default behavior, get recipes update the recipes state
-    event.preventDefault();
-
-    const {title, author, description, image, link} = this.state;
-
-    if (title && author && description && image && link) {
-      API.saveBook({
-        title,
-        author,
-        description,
-        image,
-        link
-      })
-      // .then(res => {
-      //   this.loadBooks();
-      // })
-      .then(res => this.setState({
-        books: [res.data, ...this.state.books]
-      })
-      )
-      .catch(err => console.log(err));
-    }
-    
-  };
-
   handleDeleteClick = id => {
-      console.log("here")
     API.deleteBook(id)
-       //.then(res => this.loadBooks())
        .then(res => {
          this.setState({
            books: this.state.books.filter(book => book._id !== id)
