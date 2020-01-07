@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import DeleteBtn from "../components/DeleteBtn";
+import ViewBtn from "../components/ViewBtn";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
@@ -76,6 +77,7 @@ class Saved extends Component {
   };
 
   handleDeleteClick = id => {
+      console.log("here")
     API.deleteBook(id)
        //.then(res => this.loadBooks())
        .then(res => {
@@ -90,17 +92,6 @@ class Saved extends Component {
     return (
       <Container fluid>
         <Row>
-          {/* <Col size="md-6">
-            <Jumbotron>
-              <h1>What Books Should I Read?</h1>
-            </Jumbotron>
-            <form>
-              <Input name="title" placeholder="Title (required)" onChange={this.handleInputChange} />
-              <Input name="author" placeholder="Author (required)" onChange={this.handleInputChange} />
-              <TextArea name="synopsis" placeholder="Synopsis (Optional)" onChange={this.handleInputChange} />
-              <FormBtn onClick={this.handleFormSubmit}>Submit Book</FormBtn>
-            </form>
-          </Col> */}
           <Col size="md-12 sm-12">
             <Jumbotron>
               <h1>(React) Google Books Search</h1>
@@ -110,15 +101,30 @@ class Saved extends Component {
               <List>
                 {this.state.books.map(book => (
                   <ListItem key={book._id}>
-                    <a href={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                        {book.description}
-                        {book.image}
-                        {book.link}
-                      </strong>
-                    </a>
-                    <DeleteBtn onClick={() => this.handleDeleteClick(book._id)} />
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <h3>{book.title}</h3>
+                        </div>
+                        <div class="col-sm-1">
+                            <ViewBtn>{book.link}</ViewBtn>
+                        </div>
+                        <div class="col-sm-0">
+                            <DeleteBtn onClick={() => this.handleDeleteClick(book._id)} />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <h5>Written By: {book.author}</h5>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            <img src={book.image}></img>
+                        </div>
+                        <div class="col-md-10">
+                            <h6>{book.description}</h6>
+                        </div>
+                    </div>
                   </ListItem>
                 ))}
               </List>

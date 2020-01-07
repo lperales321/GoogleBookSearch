@@ -86,7 +86,7 @@ class Books extends Component {
     return (
       <Container fluid>
         <Row>
-          {/* <Col size="md-6">
+          <Col size="md-6">
             <Jumbotron>
               <h1>What Books Should I Read?</h1>
             </Jumbotron>
@@ -96,8 +96,8 @@ class Books extends Component {
               <TextArea name="synopsis" placeholder="Synopsis (Optional)" onChange={this.handleInputChange} />
               <FormBtn onClick={this.handleFormSubmit}>Submit Book</FormBtn>
             </form>
-          </Col> */}
-          <Col size="md-6 sm-12">
+          </Col>
+          {/* <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>Books On My List</h1>
             </Jumbotron>
@@ -117,7 +117,7 @@ class Books extends Component {
             ) : (
               <h3>No Results to Display</h3>
             )}
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     );
