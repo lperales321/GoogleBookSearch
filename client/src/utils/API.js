@@ -1,6 +1,19 @@
 import axios from "axios";
 
 export default {
+  // Search for book
+  findBooks: function(title) {
+    return axios({
+      "method":"GET",
+      "url":"https://www.googleapis.com/books/v1/volumes?q=" + title + "&key=" + "AIzaSyDU0dlAtMCVbQUIp5gsOgZBu7V20dMk5jc"
+      })
+      .then((response)=>{
+        console.log(response)
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+  },
   // Gets all books
   getBooks: function() {
     return axios.get("/api/books");

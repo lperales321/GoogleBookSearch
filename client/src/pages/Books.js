@@ -39,6 +39,20 @@ class Books extends Component {
     });
   };
 
+  handleSearchClick = event => {
+    // When the form is submitted, prevent its default behavior, get books, update the books state
+    event.preventDefault();
+
+    if (this.state.title) {
+      API.findBooks(this.state.title)
+      .then(res => this.setState({
+        books: [res.data, ...this.state.books]
+      })
+      )
+      .catch(err => console.log(err));
+    }
+  };
+
   handleSaveClick = event => {
     // When the form is submitted, prevent its default behavior, get books, update the books state
     event.preventDefault();
@@ -62,7 +76,6 @@ class Books extends Component {
       )
       .catch(err => console.log(err));
     }
-    
   };
 
   render() {
